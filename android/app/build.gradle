@@ -110,6 +110,14 @@ android {
         }
         resValue "string", "build_config_package", "com.blockpassfakeservice"
     }
+    signingConfigs {
+        debug {
+            storeFile file('debug.keystore')
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+            storePassword 'android'
+        }
+    }
     splits {
         abi {
             reset()
@@ -122,6 +130,9 @@ android {
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+        }
+        debug {
+            signingConfig signingConfigs.debug
         }
     }
 
