@@ -7,9 +7,13 @@ import {
     Linking
 } from 'react-native';
 import { Button } from 'react-native-elements'
+import { connect } from 'react-redux'
+import uuid from 'uuid/v4'
 import Config from 'react-native-config'
 
-export default class Main extends Component {
+import actions from '@actions'
+
+class Main extends Component {
 
     render() {
         return (
@@ -28,11 +32,20 @@ export default class Main extends Component {
     }
 
     _openBlockpass = () => {
-        const url = `app://blockpass?service_id=${Config.SERVICE_ID}`
-        Linking.canOpenURL(url).then((supported) => {
-            if (supported){
-                return Linking.openURL(url)
-            }
+        const { getTicket } = this.props
+        const randomString = uuid()
+        getTicket({
+            clientId: Config.CLIENT_ID,
+            xsrfsig: randomString,
+            destination: encodeURIComponent(Config.DEEP_LINK)
         })
     }
 }
+const mapStateToProps = (state) => ({
+
+})
+const mapDispatchToProps = (dispatch) => ({
+    getTicket: (data) => dispatch(actions.getServiceTicket(data))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main)
