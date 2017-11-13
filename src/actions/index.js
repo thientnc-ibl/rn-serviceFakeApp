@@ -8,6 +8,9 @@ const getServiceTicket = (data) => (dispatch) => {
     })
 }
 
+const saveAuthorizationCode = (code) => ({ type: TYPES.SAVE_AUTH_CODE, payload: code })
+
 export default {
-    getServiceTicket
+    getServiceTicket,
+    saveAuthorizationCode
 }

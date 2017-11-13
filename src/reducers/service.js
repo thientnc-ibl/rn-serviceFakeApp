@@ -6,8 +6,8 @@ export default (state = initialState, action) => {
     let error
     switch (action.type) {
         case TYPES.PUT_TICKET_INIT_DATA:
-            const { xsrfsig } = action.payload
-            return { ...state, xsrfsig }
+            const payload = action.payload
+            return { ...state, ...payload }
         case TYPES.GET_TICKET_DONE:
             ({ error } = action.payload)
             if (!error) {
@@ -18,6 +18,8 @@ export default (state = initialState, action) => {
                 }
             }
             return state
+        case TYPES.SAVE_AUTH_CODE:
+            return { ...state, authCode: action.payload }
         default:
             return state
     }

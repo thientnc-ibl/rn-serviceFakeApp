@@ -3,8 +3,8 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
 import { createEpicMiddleware } from 'redux-observable'
 
-import reducers from './reducers'
-import epics from './modules/epics'
+import reducers from '@reducers'
+import epics from '@modules/epics'
 
 const epicMiddleware = createEpicMiddleware(epics)
 

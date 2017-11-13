@@ -2,7 +2,7 @@ import { ajax } from 'rxjs/observable/dom/ajax'
 import { Observable } from 'rxjs'
 import * as TYPES from '@actions/types'
 
-const HOST_NAME = '172.16.0.203:1337'
+const HOST_NAME = 'li1779-214.members.linode.com'    //'172.16.0.203:1337'
 const END_POINT = `http://${HOST_NAME}/api`
 
 export const getServiceTicket = (action$) => {

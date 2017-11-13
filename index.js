@@ -1,4 +1,11 @@
+import React from 'react'
 import { AppRegistry } from 'react-native';
-import App from './App';
+import View from './src';
+import { App } from '@containers'
 
-AppRegistry.registerComponent('blockpassFakeService', () => App);
+const Main = () => (
+    <App>
+        <View />
+    </App>
+)
+AppRegistry.registerComponent('blockpassFakeService', () => Main);
