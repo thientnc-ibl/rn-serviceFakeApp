@@ -11,11 +11,13 @@ import uuid from 'uuid/v4'
 import Config from 'react-native-config'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
-import { Input } from '@components'
+import { Input, Profile } from '@components'
 import actions from '@actions'
 
 class Main extends Component {
 
+    state = {}
+    
     render() {
         return (
             <KeyboardAwareScrollView style={{ flex: 1 }} keyboardShouldPersistTaps='always'>
@@ -24,7 +26,7 @@ class Main extends Component {
                     centerComponent={{ text: 'FAKE service', style: { color: '#fff' } }}
                     rightComponent={{ icon: 'home', color: '#fff' }}
                 />
-                <View style={{ flex: 1, alignItems: 'center', marginTop: 16, paddingLeft: 16 }}>
+                <View style={{ flex: 1, alignItems: 'center', paddingLeft: 16 }}>
                     <Text style={{ marginTop: 16 }}>{`Deeplink: ${Config.DEEP_LINK}`}</Text>
                     <View style={{ marginTop: 16 }}>
                         <FormLabel>Client ID</FormLabel>
@@ -36,8 +38,8 @@ class Main extends Component {
                     </View>
                 </View>
                 <View>
-                    {!this.props.registeredSuccess && <View style={{ height: 48 }} />}
-                    {this.props.registeredSuccess && <Icon name='check-box' color='lime' size={48}/>}
+                    {!this.props.profile && <View style={{ height: 64 }} />}
+                    {this.props.profile && <Profile style={{ paddingTop: 8 }} data={this.props.profile}/>}
                 </View>
                 <View style={{ alignItems: 'center', marginTop: 16 }}>
                     <Button
@@ -77,7 +79,8 @@ class Main extends Component {
     }
 }
 const mapStateToProps = (state) => ({
-    registeredSuccess: !!state.service.authorization
+    registeredSuccess: !!state.service.authorization,
+    profile: state.service.profile
 })
 const mapDispatchToProps = (dispatch) => ({
     getTicket: (data) => dispatch(actions.getServiceTicket(data)),

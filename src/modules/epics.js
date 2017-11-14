@@ -7,5 +7,7 @@ import { callBlockpassApp } from './blockpass'
 export default combineEpics(
     API.getServiceTicket,
     API.getServiceToken,
+    API.getProfile,
+    API.getProfileRequest,
     callBlockpassApp
 )

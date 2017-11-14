@@ -17,7 +17,7 @@ export default (state = initialState, action) => {
                     ticket: as
                 }
             }
-            return state
+            return { ...state, ticket: null }
         case TYPES.SAVE_AUTH_CODE:
             return { ...state, authCode: action.payload }
         case TYPES.GET_AUTH_TOKEN_DONE:
@@ -26,6 +26,9 @@ export default (state = initialState, action) => {
                 return { ...state, authorization: null }
             }
             return { ...state, authorization: {...action.payload.response} }
+        case TYPES.GET_PROFILE_DONE:
+            if (error) return { ...state, profile: null }
+            return { ...state, profile: {...action.payload.response} }
         default:
             return state
     }

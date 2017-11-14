@@ -2,7 +2,8 @@ import { ajax } from 'rxjs/observable/dom/ajax'
 import { Observable } from 'rxjs'
 import * as TYPES from '@actions/types'
 
-const HOST_NAME = 'li1779-214.members.linode.com'    //'172.16.0.203:1337'
+const HOST_NAME = 'li1779-214.members.linode.com'   //'172.16.0.203:1337'
+//'li1779-214.members.linode.com'
 const END_POINT = `http://${HOST_NAME}/api`
 
 export const getServiceTicket = (action$) => {
@@ -30,7 +31,25 @@ export const getServiceToken = (action$) => {
 
         return ajax.post(`${END_POINT}/oauth2/token/`, data, { 'Content-Type': "multipart/form-data", 'Accept': 'application/json' })
             .catch(error => Observable.of({ error }))
-            .map(response => getFulfilled(TYPES.GET_AUTH_TOKEN_DONE, response)).takeUntil(action$.ofType('FETCH_USER_CANCELLED'))
+            .map(response => getFulfilled(TYPES.GET_AUTH_TOKEN_DONE, response))
+            .takeUntil(action$.ofType('FETCH_USER_CANCELLED'))
+    })
+}
+
+export const getProfileRequest = (action$) => {
+    return action$.ofType(TYPES.GET_AUTH_TOKEN_DONE).mapTo((dispatch, getState) => {
+        const { authorization } = getState().service
+        if (!authorization || !authorization.access_token) return
+        dispatch({ type: TYPES.GET_PROFILE_REQUEST, payload: authorization.access_token })
+    })
+}
+
+export const getProfile = (action$) => {
+    return action$.ofType(TYPES.GET_PROFILE_REQUEST).switchMap(action => {
+        const access_token = action.payload
+        return ajax.post(`${END_POINT}/oauth2/profile/`, null, { 'Accept': 'application/json', 'Authorization': access_token.replace('ya29.', '') })
+            .catch(error => Observable.of({ error }))
+            .map(response => getFulfilled(TYPES.GET_PROFILE_DONE, response)).takeUntil(action$.ofType('FETCH_USER_CANCELLED'))
     })
 }
 
