@@ -15,8 +15,23 @@ export const getServiceTicket = (action$) => {
 
         return ajax.post(`${END_POINT}/signin/oauth/ticket/`, data, { 'Content-Type': "multipart/form-data", 'Accept': 'application/json' })
             .catch(error => Observable.of({ error }))
-            .map(response => getTicketFulfilled(response)).takeUntil(action$.ofType('FETCH_USER_CANCELLED'))
+            .map(response => getFulfilled(TYPES.GET_TICKET_DONE, response)).takeUntil(action$.ofType('FETCH_USER_CANCELLED'))
     })
 }
 
-const getTicketFulfilled = (payload) => ({ type: TYPES.GET_TICKET_DONE, payload })
+export const getServiceToken = (action$) => {
+    return action$.ofType(TYPES.GET_AUTH_TOKEN).switchMap(action => {
+        const { clientId, clientSecret, authCode } = action.payload
+        const data = new FormData()
+        data.append('client_id', clientId)
+        data.append('client_secret', clientSecret)
+        data.append('code', authCode)
+        data.append('grant_type', 'authorization_code')
+
+        return ajax.post(`${END_POINT}/oauth2/token/`, data, { 'Content-Type': "multipart/form-data", 'Accept': 'application/json' })
+            .catch(error => Observable.of({ error }))
+            .map(response => getFulfilled(TYPES.GET_AUTH_TOKEN_DONE, response)).takeUntil(action$.ofType('FETCH_USER_CANCELLED'))
+    })
+}
+
+const getFulfilled = (actionType, payload) => ({ type: actionType, payload })
