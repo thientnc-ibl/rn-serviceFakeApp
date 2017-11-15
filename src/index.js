@@ -74,7 +74,7 @@ class Main extends Component {
         getTicket({
             clientId: this.state.clientId,
             xsrfsig: randomString,
-            destination: encodeURIComponent(Config.DEEP_LINK)
+            destination: encodeURIComponent('app://servicefake01')//(Config.DEEP_LINK)
         })
     }
 }

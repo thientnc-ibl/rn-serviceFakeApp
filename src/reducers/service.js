@@ -1,3 +1,4 @@
+import { Alert } from 'react-native'
 import * as TYPES from '@actions/types'
 
 const initialState = {}
@@ -11,7 +12,7 @@ export default (state = initialState, action) => {
         case TYPES.GET_TICKET_DONE:
             ({ error } = action.payload)
             if (!error) {
-                const { as } = action.payload.response
+                const { as } = action.payload
                 return {
                     ...state,
                     ticket: as
@@ -25,10 +26,10 @@ export default (state = initialState, action) => {
             if (error) {
                 return { ...state, authorization: null }
             }
-            return { ...state, authorization: {...action.payload.response} }
+            return { ...state, authorization: {...action.payload} }
         case TYPES.GET_PROFILE_DONE:
             if (error) return { ...state, profile: null }
-            return { ...state, profile: {...action.payload.response} }
+            return { ...state, profile: {...action.payload} }
         default:
             return state
     }

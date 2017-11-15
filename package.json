@@ -3,9 +3,11 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start --port 8082",
+    "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
-    "android01": "ENVFILE=.env.fake01 react-native run-android --port 8082 --variant fake01Debug",
+    "android": "ENVFILE=.env.fake01 react-native run-android --port 8082 --variant fake01Debug",
+    "ios": "react-native run-ios",
+    "iosrelease": "ENVFILE=.env.fake01 react-native run-ios --configuration release",
     "apk": "cd ./android && ENVFILE=.env.fake01 ./gradlew assembleFake01Release",
     "_assembleDebug": "cd ./android && ENVFILE=.env.fake01 ./gradlew assembleFake01Debug && cd ../",
     "_bundleDebug": "ENVFILE=.env.fake01 && react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/build/intermediates/assets/fake01/debug/index.android.bundle --assets-dest android/app/build/intermediates/res/merged/fake01/debug/"
