@@ -18,10 +18,9 @@ export const getServiceTicket = (action$) => {
             method: 'POST',
             headers: { 'Content-Type': "multipart/form-data", 'Accept': 'application/json' },
             body: data
-        }).then(response => response.json())).catch(error => Observable.of({ error })).map(response => getFulfilled(TYPES.GET_TICKET_DONE, response)).takeUntil(action$.ofType('FETCH_USER_CANCELLED'))
-        // return ajax.post(`${END_POINT}/signin/oauth/ticket/`, data, { 'Content-Type': "multipart/form-data", 'Accept': 'application/json' })
-        //     .catch(error => Observable.of({ error }))
-        //     .map(response => getFulfilled(TYPES.GET_TICKET_DONE, response)).takeUntil(action$.ofType('FETCH_USER_CANCELLED'))
+        }).then(response => response.json()))
+            .catch(error => Observable.of({ error }))
+            .map(response => getFulfilled(TYPES.GET_TICKET_DONE, response)).takeUntil(action$.ofType('FETCH_USER_CANCELLED'))
     })
 }
 
@@ -41,11 +40,6 @@ export const getServiceToken = (action$) => {
         }).then(response => response.json()))
             .catch(error => Observable.of({ error }))
             .map(response => getFulfilled(TYPES.GET_AUTH_TOKEN_DONE, response)).takeUntil(action$.ofType('FETCH_USER_CANCELLED'))
-
-        // return ajax.post(`${END_POINT}/oauth2/token/`, data, { 'Content-Type': "multipart/form-data", 'Accept': 'application/json' })
-        //     .catch(error => Observable.of({ error }))
-        //     .map(response => getFulfilled(TYPES.GET_AUTH_TOKEN_DONE, response))
-        //     .takeUntil(action$.ofType('FETCH_USER_CANCELLED'))
     })
 }
 
@@ -63,13 +57,10 @@ export const getProfile = (action$) => {
 
         return Observable.fromPromise(fetch(`${END_POINT}/oauth2/profile/`, {
             method: 'POST',
-            headers: { 'Accept': 'application/json' }
+            headers: { 'Accept': 'application/json', 'Authorization': access_token.replace('ya29.', '') }
         }).then(response => response.json()))
             .catch(error => Observable.of({ error }))
             .map(response => getFulfilled(TYPES.GET_PROFILE_DONE, response)).takeUntil(action$.ofType('FETCH_USER_CANCELLED'))
-        // return ajax.post(`${END_POINT}/oauth2/profile/`, null, { 'Accept': 'application/json', 'Authorization': access_token.replace('ya29.', '') })
-        //     .catch(error => Observable.of({ error }))
-        //     .map(response => getFulfilled(TYPES.GET_PROFILE_DONE, response)).takeUntil(action$.ofType('FETCH_USER_CANCELLED'))
     })
 }
 

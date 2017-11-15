@@ -65,10 +65,13 @@
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
 	</array>
-	<key>NSAppTransportSecurity</key>  
- 	<dict>  
-      		<key>NSAllowsArbitraryLoads</key><true/>  
+	<key>NSAppTransportSecurity</key>
+ 	<dict>
+      		<key>NSAllowsArbitraryLoads</key><true/>
 	</dict>
-
+  <key>LSApplicationQueriesSchemes</key>
+  <array>
+    <string>blockpass</string>
+  </array>
 </dict>
 </plist>
