@@ -7,12 +7,12 @@ import {
 } from 'react-native';
 import { Button, Text, FormLabel, FormInput, Header, Icon } from 'react-native-elements'
 import { connect } from 'react-redux'
-import uuid from 'uuid/v4'
 import Config from 'react-native-config'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 import { Input, Profile } from '@components'
 import actions from '@actions'
+import * as Strings from '@utils/strings'
 
 class Main extends Component {
 
@@ -70,7 +70,7 @@ class Main extends Component {
 
     _openBlockpass = () => {
         const { getTicket } = this.props
-        const randomString = uuid()
+        const randomString = Strings.randomUUID()
         getTicket({
             clientId: this.state.clientId,
             xsrfsig: randomString,

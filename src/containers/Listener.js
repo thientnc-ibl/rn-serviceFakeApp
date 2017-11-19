@@ -28,8 +28,8 @@ class Listener extends Component {
     }
 
     _handleOpenURL = (event) => {
-        const { auth_code: code } = StringUtils.getQueryString(event.url)
-        this.props.saveAuthorizationCode(code)
+        const tokens = StringUtils.getQueryString(event.url)
+        this.props.saveAuthorizationCode(tokens)
     }
 
     _handleAppStateChange = (nextAppState) => {

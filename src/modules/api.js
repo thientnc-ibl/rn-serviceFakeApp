@@ -1,10 +1,12 @@
 import { ajax } from 'rxjs/observable/dom/ajax'
 import { Observable } from 'rxjs'
 import * as TYPES from '@actions/types'
+import * as Strings from '@utils/strings'
 
 const HOST_NAME = 'li1779-214.members.linode.com'   //'172.16.0.203:1337'
 //'li1779-214.members.linode.com'
 const END_POINT = `http://${HOST_NAME}/api`
+const TIMEOUT = 3000
 
 export const getServiceTicket = (action$) => {
     return action$.ofType(TYPES.GET_TICKET).switchMap(action => {
@@ -20,7 +22,7 @@ export const getServiceTicket = (action$) => {
             body: data
         }).then(response => response.json()))
             .catch(error => Observable.of({ error }))
-            .map(response => getFulfilled(TYPES.GET_TICKET_DONE, response)).takeUntil(action$.ofType('FETCH_USER_CANCELLED'))
+            .map(response => getFulfilled(TYPES.GET_TICKET_DONE, response)).takeUntil(action$.ofType(TYPES.REQUEST_CANCELLED))
     })
 }
 
@@ -39,7 +41,7 @@ export const getServiceToken = (action$) => {
             body: data
         }).then(response => response.json()))
             .catch(error => Observable.of({ error }))
-            .map(response => getFulfilled(TYPES.GET_AUTH_TOKEN_DONE, response)).takeUntil(action$.ofType('FETCH_USER_CANCELLED'))
+            .map(response => getFulfilled(TYPES.GET_AUTH_TOKEN_DONE, response)).takeUntil(action$.ofType(TYPES.REQUEST_CANCELLED))
     })
 }
 
@@ -60,8 +62,15 @@ export const getProfile = (action$) => {
             headers: { 'Accept': 'application/json', 'Authorization': access_token.replace('ya29.', '') }
         }).then(response => response.json()))
             .catch(error => Observable.of({ error }))
-            .map(response => getFulfilled(TYPES.GET_PROFILE_DONE, response)).takeUntil(action$.ofType('FETCH_USER_CANCELLED'))
+            .map(response => getFulfilled(TYPES.GET_PROFILE_DONE, response)).takeUntil(action$.ofType(TYPES.REQUEST_CANCELLED))
     })
 }
 
 const getFulfilled = (actionType, payload) => ({ type: actionType, payload })
+
+// const requestPool = {}
+
+// const registerTimeout = () => {
+// }
+
+// const cancelRequest = (id) => ({ type: TYPES.REQUEST_CANCELLED, payload: id })
