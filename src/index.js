@@ -51,7 +51,7 @@ class Main extends Component {
                     <Button
                         buttonStyle={{ flexDirection: 'row', backgroundColor: 'powderblue', borderRadius: 4, margin: 4 }}
                         textStyle={{ textAlign: 'center' }}
-                        title={`GET TOKEN`}
+                        title={`GET Profile`}
                         onPress={this._getToken}
                     />
                 </View>
@@ -65,7 +65,7 @@ class Main extends Component {
 
     _getToken = () => {
         const { clientId, clientSecret } = this.state
-        this.props.getServiceToken(clientId, clientSecret)
+        this.props.getProfile()
     }
 
     _openBlockpass = () => {
@@ -84,7 +84,7 @@ const mapStateToProps = (state) => ({
 })
 const mapDispatchToProps = (dispatch) => ({
     getTicket: (data) => dispatch(actions.getServiceTicket(data)),
-    getServiceToken: (clientId, clientSecret) => dispatch(actions.getServiceToken(clientId, clientSecret))
+    getProfile: (clientId, clientSecret) => dispatch(actions.getProfile())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main)

@@ -3,7 +3,7 @@ import { Observable } from 'rxjs'
 import * as TYPES from '@actions/types'
 import * as Strings from '@utils/strings'
 
-const HOST_NAME = 'li1779-214.members.linode.com'   //'172.16.0.203:1337'
+const HOST_NAME = '172.16.0.203:1337'
 //'li1779-214.members.linode.com'
 const END_POINT = `http://${HOST_NAME}/api`
 const TIMEOUT = 3000
@@ -67,10 +67,3 @@ export const getProfile = (action$) => {
 }
 
 const getFulfilled = (actionType, payload) => ({ type: actionType, payload })
-
-// const requestPool = {}
-
-// const registerTimeout = () => {
-// }
-
-// const cancelRequest = (id) => ({ type: TYPES.REQUEST_CANCELLED, payload: id })

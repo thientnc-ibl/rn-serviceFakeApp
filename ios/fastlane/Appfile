@@ -1,0 +1,7 @@
+app_identifier "org.reactjs.native.blockpassFakeService" # The bundle identifier of your app
+apple_id "thientnc@blockpass.org" # Your Apple email address
+
+team_id "[[DEV_PORTAL_TEAM_ID]]" # Developer Portal Team ID
+
+# you can even provide different app identifiers, Apple IDs and team names per lane:
+# More information: https://docs.fastlane.tools/advanced/#appfile
