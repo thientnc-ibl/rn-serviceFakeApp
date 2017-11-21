@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import { Button, Text, FormLabel, FormInput, Header, Icon } from 'react-native-elements'
 import { connect } from 'react-redux'
-import Config from 'react-native-config'
+import Configs from 'react-native-config'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 import { Input, Profile } from '@components'
@@ -27,7 +27,8 @@ class Main extends Component {
                     rightComponent={{ icon: 'home', color: '#fff' }}
                 />
                 <View style={{ flex: 1, alignItems: 'center', paddingLeft: 16 }}>
-                    <Text style={{ marginTop: 16 }}>{`Deeplink: ${Config.DEEP_LINK}`}</Text>
+                <Text style={{ marginTop: 16 }}>{`API server: ${Configs.HOST_NAME}`}</Text>
+                    <Text style={{ marginTop: 16 }}>{`Deeplink: ${Configs.DEEP_LINK}`}</Text>
                     <View style={{ marginTop: 16 }}>
                         <FormLabel>Client ID</FormLabel>
                         <Input name='clientId' onChangeText={this._onChangeText} />
@@ -74,7 +75,7 @@ class Main extends Component {
         getTicket({
             clientId: this.state.clientId,
             xsrfsig: randomString,
-            destination: encodeURIComponent('app://servicefake01')//(Config.DEEP_LINK)
+            destination: encodeURIComponent(Configs.DEEP_LINK)
         })
     }
 }
