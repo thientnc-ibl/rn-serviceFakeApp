@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
-    "android": "ENVFILE=.env.local react-native run-android --port 8082 --variant fake01Debug",
+    "android": "ENVFILE=.env react-native run-android --port 8082 --variant fake01Debug",
+    "androidlocal": "ENVFILE=.env.local react-native run-android --port 8082 --variant fake01Debug",
     "ios": "react-native run-ios",
     "ioslocal": "react-native run-ios --scheme local",
     "iosrelease": "react-native run-ios --configuration release",
