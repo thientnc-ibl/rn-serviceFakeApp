@@ -54,6 +54,12 @@ class Main extends Component {
                         title={`GET TOKEN`}
                         onPress={this._getToken}
                     />
+                    <Button
+                        buttonStyle={{ flexDirection: 'row', backgroundColor: 'powderblue', borderRadius: 4, margin: 4 }}
+                        textStyle={{ textAlign: 'center' }}
+                        title={`SCAN QRCODE`}
+                        onPress={this._scanQrCode}
+                    />
                 </View>
             </KeyboardAwareScrollView>
         )
@@ -76,6 +82,10 @@ class Main extends Component {
             xsrfsig: randomString,
             destination: encodeURIComponent('app://servicefake01')//(Config.DEEP_LINK)
         })
+    }
+
+    _scanQrCode = () => {
+        Linking.openURL('blockpass://service/qrcode')
     }
 }
 const mapStateToProps = (state) => ({
