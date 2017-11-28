@@ -16,9 +16,14 @@ const getServiceToken = (clientId, clientSectet) => (dispatch, getState) => {
     })
 }
 
+export const getProfile = () => (dispatch, getState) => {
+    dispatch(({ type: TYPES.GET_PROFILE_REQUEST, payload: getState().service.tokens.access_token }))
+}
+
 const saveAuthorizationCode = (code) => ({ type: TYPES.SAVE_AUTH_CODE, payload: code })
 
 export default {
+    getProfile,
     getServiceTicket,
     getServiceToken,
     saveAuthorizationCode

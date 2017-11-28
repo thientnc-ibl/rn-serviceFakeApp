@@ -20,7 +20,7 @@ export default (state = initialState, action) => {
             }
             return { ...state, ticket: null }
         case TYPES.SAVE_AUTH_CODE:
-            return { ...state, token: {...action.payload} }
+            return { ...state, tokens: {...action.payload} }
         case TYPES.GET_AUTH_TOKEN_DONE:
             ({ error } = action.payload)
             if (error) {
