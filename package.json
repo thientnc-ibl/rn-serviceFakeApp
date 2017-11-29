@@ -13,6 +13,8 @@
     "ioslocalrelease": "react-native run-ios --scheme local --configuration release",
     "apk": "cd ./android && ENVFILE=.env ./gradlew assembleFake01Release",
     "apklocal": "cd ./android && ENVFILE=.env.local ./gradlew assembleFake01Release",
+    "watchmanclean": "watchman watch-del ./ ; watchman watch-project ./",
+    "kill_the_cat": "node node_modules/react-native/local-cli/cli.js start --reset-cache",
     "_assembleDebug": "cd ./android && ENVFILE=.env.fake01 ./gradlew assembleFake01Debug && cd ../",
     "_bundleDebug": "ENVFILE=.env.fake01 && react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/build/intermediates/assets/fake01/debug/index.android.bundle --assets-dest android/app/build/intermediates/res/merged/fake01/debug/"
   },
@@ -20,6 +22,7 @@
     "lodash": "^4.17.4",
     "react": "16.0.0",
     "react-native": "0.50.2",
+    "react-native-camera": "^0.12.0",
     "react-native-config": "^0.9.0",
     "react-native-elements": "^0.18.2",
     "react-native-keyboard-aware-scroll-view": "^0.4.1",
